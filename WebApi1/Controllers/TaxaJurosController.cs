@@ -12,13 +12,7 @@ namespace Web.Controllers
     public class TaxaJurosController : ControllerBase
     {
         private static decimal _taxaJuros = 0.01M;
-        private readonly ILogger<TaxaJurosController> _logger;
-
-        public TaxaJurosController(ILogger<TaxaJurosController> logger)
-        {
-            _logger = logger;
-        }
-
+        
         [HttpGet]
         public decimal Get()
         {
