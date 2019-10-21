@@ -12,10 +12,12 @@ namespace WebApi2.Controllers
     [Route("[controller]")]
     public class CalculaJurosController : ControllerBase
     {
-        [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        [HttpGet]        
+        public Task<int> Get(decimal valorinicial, int tempo)
         {
-            return new List<WeatherForecast>();
+            
+
+            return new List<object>();
         }
     }
 }
