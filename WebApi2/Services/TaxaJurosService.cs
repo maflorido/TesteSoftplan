@@ -7,7 +7,7 @@ namespace WebApi2.Services
     public class TaxaJurosService: ITaxaJurosService
     {        
         private const string _apiUrl = "https://localhost:44379/taxaJuros";
-        public async Task<double> GetTaxaJuros(double? valorinicial, double? tempo)
+        public async Task<double> ObterValorFinal(double? valorinicial, double? tempo)
         {
             if (!valorinicial.HasValue || !tempo.HasValue)
                 return 0;
@@ -16,7 +16,7 @@ namespace WebApi2.Services
             return Math.Pow(valorinicial.Value * (1 + taxaJuros), tempo.Value);
         }
 
-        private async Task<double> ObterTaxaJuros()
+        public async Task<double> ObterTaxaJuros()
         {
             using (HttpClient client = new HttpClient())
             {
