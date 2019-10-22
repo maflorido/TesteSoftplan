@@ -1,10 +1,7 @@
-﻿
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using WebApi2.Services;
 
 namespace WebApi2.Controllers
 {
@@ -12,12 +9,18 @@ namespace WebApi2.Controllers
     [Route("[controller]")]
     public class CalculaJurosController : ControllerBase
     {
-        [HttpGet]        
-        public Task<int> Get(decimal valorinicial, int tempo)
-        {
-            
+        private readonly ITaxaJurosService _taxaJurosService;
 
-            return new List<object>();
+        public CalculaJurosController(ITaxaJurosService taxaJurosService)
+        {
+            _taxaJurosService = taxaJurosService;
+        }
+        
+        [HttpGet]        
+        public async Task<double> Get(double? valorinicial, double? tempo)
+        {
+            double taxaJuros = await _taxaJurosService.GetTaxaJuros(valorinicial, tempo);
+            return taxaJuros;
         }
     }
 }
