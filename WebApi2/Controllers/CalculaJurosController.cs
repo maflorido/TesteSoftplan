@@ -19,7 +19,7 @@ namespace WebApi2.Controllers
         [HttpGet]        
         public async Task<double> Get(double? valorinicial, double? tempo)
         {
-            double taxaJuros = await _taxaJurosService.GetTaxaJuros(valorinicial, tempo);
+            double taxaJuros = await _taxaJurosService.ObterValorFinal(valorinicial, tempo);
             return taxaJuros;
         }
     }

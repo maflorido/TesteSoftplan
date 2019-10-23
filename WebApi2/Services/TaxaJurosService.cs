@@ -1,6 +1,8 @@
 using System;
+using System.Globalization;
 using System.Net.Http;
 using System.Threading.Tasks;
+using WebApi2.Extensions;
 
 namespace WebApi2.Services
 {
@@ -13,17 +15,23 @@ namespace WebApi2.Services
                 return 0;
 
             double taxaJuros = await ObterTaxaJuros();
-            return Math.Pow(valorinicial.Value * (1 + taxaJuros), tempo.Value);
+            
+            return (valorinicial.Value * Math.Pow(1 + taxaJuros, tempo.Value)).Truncate(2);
         }
 
-        public async Task<double> ObterTaxaJuros()
+        /// <summary>
+        /// o método é virtual devido ao fato de precisar ser mocado no teste.
+        /// poderia ser um método privado e usar o fake para mocar, mas preferi fazer assim.
+        /// </summary>
+        /// <returns></returns>
+        public virtual async Task<double> ObterTaxaJuros()
         {
             using (HttpClient client = new HttpClient())
             {
                 HttpResponseMessage response = await client.GetAsync(_apiUrl);
                 if (response.IsSuccessStatusCode)
                 {
-                    return double.Parse(response.Content.ReadAsStringAsync().Result);                    
+                    return double.Parse(response.Content.ReadAsStringAsync().Result, CultureInfo.InvariantCulture);                    
                 }
                 else
                     throw new Exception(response.Content.ReadAsStringAsync().Result);
