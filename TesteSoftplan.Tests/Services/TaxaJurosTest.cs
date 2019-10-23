@@ -35,5 +35,15 @@ namespace TesteSoftplan.Tests
             var retorno = mock.Object.ObterValorFinal(1000, 3).Result;
             Assert.AreEqual(1030.30, retorno);
         }
+
+        [Test]
+        public void TaxaJuros_Get3()
+        {
+            Mock<TaxaJurosService> mock = new Mock<TaxaJurosService>();
+            mock.Setup(x => x.ObterTaxaJuros()).ReturnsAsync(0.01);
+
+            var retorno = mock.Object.ObterValorFinal(100, 5).Result;
+            Assert.AreEqual(105.10, retorno);
+        }
     }
 }
