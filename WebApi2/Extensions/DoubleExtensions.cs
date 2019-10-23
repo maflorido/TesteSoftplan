@@ -9,7 +9,7 @@ namespace WebApi2.Extensions
             decimal valor = Convert.ToDecimal(value);
             decimal fator = (decimal)Math.Pow(10d, casasDecimais);
             decimal valorTruncado = Math.Floor(valor * fator);
-            return Convert.ToDouble(Math.Floor((Math.Round(valorTruncado, casasDecimais))) / fator);
+            return Convert.ToDouble(Math.Floor(Math.Round(valorTruncado, casasDecimais)) / fator);
         }
     }
 }
